@@ -34,22 +34,179 @@ python_library_host {
     },
 }
 
-genrule {
-    name: "carrier_extraction-apn",
-    tools: ["carriersettings_extractor"],
-    cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf.xml $(genDir)/carrierconfig-vendor.xml $$TARGET_PRODUCT",
-    out: [
-        "apns-conf.xml",
+soong_config_module_type {
+    name: "carrier_extractor_genrule",
+    module_type: "genrule",
+    config_namespace: "carrierconfig-extractor",
+    variables: ["product"],
+    properties: ["cmd", "out"],
+}
+
+soong_config_string_variable {
+    name: "product",
+    values: [
+        "flame",
+        "coral",
+        "sunfish",
+        "bramble",
+        "redfin",
+        "barbet",
+        "oriole",
+        "raven",
+        "bluejay",
+        "panther",
+        "cheetah",
     ],
 }
 
-genrule {
+carrier_extractor_genrule {
+    name: "carrier_extraction-apn",
+    tools: ["carriersettings_extractor"],
+    soong_config_variables: {
+        product: {
+            flame: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-flame.xml $(genDir)/carrierconfig-vendor-flame.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-flame.xml",
+                ],
+            },
+            coral: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-coral.xml $(genDir)/carrierconfig-vendor-coral.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-coral.xml",
+                ],
+            },
+            sunfish: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-sunfish.xml $(genDir)/carrierconfig-vendor-sunfish.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-sunfish.xml",
+                ],
+            },
+            bramble: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-bramble.xml $(genDir)/carrierconfig-vendor-bramble.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-bramble.xml",
+                ],
+            },
+            redfin: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-redfin.xml $(genDir)/carrierconfig-vendor-redfin.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-redfin.xml",
+                ],
+            },
+            barbet: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-barbet.xml $(genDir)/carrierconfig-vendor-barbet.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-barbet.xml",
+                ],
+            },
+            oriole: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-oriole.xml $(genDir)/carrierconfig-vendor-oriole.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-oriole.xml",
+                ],
+            },
+            raven: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-raven.xml $(genDir)/carrierconfig-vendor-raven.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-raven.xml",
+                ],
+            },
+            bluejay: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-bluejay.xml $(genDir)/carrierconfig-vendor-bluejay.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-bluejay.xml",
+                ],
+            },
+            panther: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-panther.xml $(genDir)/carrierconfig-vendor-panther.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-panther.xml",
+                ],
+            },
+            cheetah: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-cheetah.xml $(genDir)/carrierconfig-vendor-cheetah.xml $$TARGET_PRODUCT",
+                out: [
+                    "apns-conf-cheetah.xml",
+                ],
+            },
+        },
+    },
+}
+
+carrier_extractor_genrule {
     name: "carrier_extraction-cc",
     tools: ["carriersettings_extractor"],
-    cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf.xml $(genDir)/carrierconfig-vendor.xml $$TARGET_PRODUCT",
-    out: [
-        "carrierconfig-vendor.xml",
-    ],
+    soong_config_variables: {
+        product: {
+            flame: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-flame.xml $(genDir)/carrierconfig-vendor-flame.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-flame.xml",
+                ],
+            },
+            coral: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-coral.xml $(genDir)/carrierconfig-vendor-coral.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-coral.xml",
+                ],
+            },
+            sunfish: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-sunfish.xml $(genDir)/carrierconfig-vendor-sunfish.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-sunfish.xml",
+                ],
+            },
+            bramble: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-bramble.xml $(genDir)/carrierconfig-vendor-bramble.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-bramble.xml",
+                ],
+            },
+            redfin: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-redfin.xml $(genDir)/carrierconfig-vendor-redfin.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-redfin.xml",
+                ],
+            },
+            barbet: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-barbet.xml $(genDir)/carrierconfig-vendor-barbet.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-barbet.xml",
+                ],
+            },
+            oriole: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-oriole.xml $(genDir)/carrierconfig-vendor-oriole.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-oriole.xml",
+                ],
+            },
+            raven: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-raven.xml $(genDir)/carrierconfig-vendor-raven.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-raven.xml",
+                ],
+            },
+            bluejay: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-bluejay.xml $(genDir)/carrierconfig-vendor-bluejay.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-bluejay.xml",
+                ],
+            },
+            panther: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-panther.xml $(genDir)/carrierconfig-vendor-panther.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-panther.xml",
+                ],
+            },
+            cheetah: {
+                cmd: "$(location carriersettings_extractor) vendor/google_devices/$$TARGET_PRODUCT/proprietary/product/etc/CarrierSettings/ . $(genDir)/apns-conf-cheetah.xml $(genDir)/carrierconfig-vendor-cheetah.xml $$TARGET_PRODUCT",
+                out: [
+                    "carrierconfig-vendor-cheetah.xml",
+                ],
+            },
+        },
+    },
 }
 
 prebuilt_etc {
